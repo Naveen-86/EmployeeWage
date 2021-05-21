@@ -1,38 +1,41 @@
 package com.wagecomputation;
+import java.util.*;
 
 public class EmployeeWage {
-    public static void main(String[] args)
-    {
-        int wage_per_hour = 20;
-        int part_day_hour = 3;
-        int full_day_hour = 5;
-        int total_working_days = 20;
-        while( total_working_days <= 20 ) {
 
-            double check = (Math.floor(Math.random() * 10) % 3);
-            switch ((int) check) {
+    public static final int wagePerHour = 20;
+    public static final int partTimeHour = 4;
+    public static final int fullDayHour = 8;
+    public static final int totalWorkingDays = 20;
 
-                case 1:
-                    System.out.println("Employee is present");
-                    double wage = wage_per_hour * full_day_hour;
-                    System.out.println("Daily Wage : " + wage);
-                    double salary = wage * total_working_days;
-                    total_working_days++;
-                    System.out.println("Monthly Wage : " + salary);
-                    break;
+    public static int computeWage() {
+
+        int workingHours = 0;
+        int workingDays = 0;
+
+        while ((workingDays < 20) && (workingHours < 100)){
+            Random n = new Random();
+            int ran = n.nextInt(3);
+            workingDays++;
+
+            switch(ran){
                 case 2:
-                    System.out.println("Employee is half day present");
-                    double wages = wage_per_hour * part_day_hour;
-                    System.out.println("Daily Wage : " + wages);
-                    double salaries = wages * total_working_days;
-                    total_working_days++;
-                    System.out.println("Monthly Wage : " + salaries);
+                    workingHours += fullDayHour;
+                    break;
+                case 1:
+                    workingHours += partTimeHour;
                     break;
                 case 0:
-                    System.out.println("Employee is absent.so no wage");
-                    total_working_days++;
                     break;
+                default:
             }
         }
+        int totalEmpWage = workingHours * wagePerHour;
+        System.out.println("Total employee wage: " + totalEmpWage);
+        return totalEmpWage;
+    }
+    public static void main(String[] args) {
+        System.out.println("This is employee wage computation");
+        computeWage();
     }
 }
