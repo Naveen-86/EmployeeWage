@@ -13,13 +13,14 @@ public class EmployeeWage {
 
             case 1:
                        System.out.println("Employee is present");
-                       double wage = wage_per_hour * full_day_hour;
+                       wage = wage_per_hour * full_day_hour;
                        System.out.println("Daily Wage : " + wage);
                        break;
             case 2:
                        System.out.println("Employee is half day present");
-                       double wage = wage_per_hour * part_day_hour;
+                       wage = wage_per_hour * part_day_hour;
                        System.out.println("Daily Wage : " + wage);
+                       break;
             case 0:
                        System.out.println("Employee is absent.so no wage");
         }
