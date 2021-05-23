@@ -13,11 +13,11 @@ public class EmployeeWage {
         double check = (Math.floor(Math.random() * 10) % 3);
         if ((int) check == PRESENT) {
             System.out.println("Employee is present");
-            double wage = wage_per_hour * full_day_hour;
+            wage = wage_per_hour * full_day_hour;
             System.out.println("Daily Wage : " + wage);
         } else if((int) check == PART_TIME) {
             System.out.println("Employee is half day present");
-            double wage = wage_per_hour * part_day_hour;
+            wage = wage_per_hour * part_day_hour;
             System.out.println("Daily Wage : " + wage);
         } else {
             System.out.println("Employee is absent.so no wage");
