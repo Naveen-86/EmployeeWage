@@ -4,8 +4,8 @@ public class EmployeeWage {
     public static void main(String[] args)
     {
         int wage_per_hour = 20;
-        int part_day_hour = 3;
-        int full_day_hour = 5;
+        int part_day_hour = 4;
+        int full_day_hour = 8;
         int total_working_days = 20;
         while( total_working_days <= 20 ) {
 
