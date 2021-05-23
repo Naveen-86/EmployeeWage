@@ -1,32 +1,37 @@
 package com.wagecomputation;
 
 public class EmployeeWage {
-    public static void main(String[] args)
-    {
-        int wage_per_hour = 20;
-        int part_day_hour = 4;
-        int full_day_hour = 8;
-        int total_working_days = 20;
-        int wage = 0;
+		public static void main(String[] args){
+			System.out.println("Welcome to Employee Wage Computation");
+			int wagePerHr = 20;
+			int fullTimeHrs = 8;
+			int partTimeHrs = 4;
+			int dailyWage = 0;
+			int totalWorkingDays = 20;
+			int empMonthlyWage = 0;
+			for( int day = 1; day <= totalWorkingDays; day++){
 
-        for(x = 1; x <= total_working_days; x++) {
-        double check = (Math.floor(Math.random() * 10) % 3);
-        switch ((int) check) {
+			    double empCheck = Math.floor(Math.random() * 10 % 3);
+			    int check = (int)empCheck;
+				switch(check) {
+				case 0:
+						System.out.println("Employee is absent");
+						break;
+				case 1:
+						dailyWage = wagePerHr * partTimeHrs;
+	      	            System.out.println( dailyWage + " is the employees part time wage per day");
+						break;
+				case 2:
+						dailyWage = wagePerHr * fullTimeHrs;
+						System.out.println( dailyWage + " is the employees full time wage per day");
+						break;
+				default:
+						System.out.println("invalid");
+						break;
+				}
+				
+				System.out.println(empMonthlyWage += dailyWage);
+			}
+		}
+	}
 
-            case 1:
-                       System.out.println("Employee is present");
-                       double wage = wage_per_hour * full_day_hour;
-                       System.out.println("Wage : " + wage);
-                       break;
-            case 2:
-                       System.out.println("Employee is half day present");
-                       double wage = wage_per_hour * part_day_hour;
-                       System.out.println("Wage : " + wage);
-                       break;
-            case 0:
-                       System.out.println("Employee is absent.so no wage");
-                       break;
-          }
-        }
-    }
-}
