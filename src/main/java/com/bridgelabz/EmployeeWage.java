@@ -1,12 +1,10 @@
 package com.bridgelabz;
-//Used Array List
 import java.util.ArrayList;
-
 //interface
 interface EmployeeWages
 {
     public void company(String company, int wage_per_hr, int working_days_per_month, int max_working_hrs);
-    public int wageCalculator(CompanyInfo cI);
+    public ArrayList<Integer> wageCalculator(CompanyInfo cI);
 }
 
 class CompanyInfo
@@ -16,7 +14,8 @@ class CompanyInfo
     public final int wage_per_hr;
     public final int working_days_per_month;
     public final int max_working_hrs;
-    public int totalWage = 0;
+    private int totalWage;
+    public ArrayList<Integer> dailyWage;
 
     public CompanyInfo(String company, int wage_per_hr, int working_days_per_month, int max_working_hrs)
     {
@@ -31,9 +30,25 @@ class CompanyInfo
         this.totalWage = totalWage;
     }
 
+    public void setDailyWage(ArrayList<Integer> daily_wage)
+    {
+        this.dailyWage = daily_wage;
+    }
+
+    public ArrayList<Integer> getDailyWages()
+    {
+        return dailyWage;
+    }
+
+    public int getTotalWage()
+    {
+        return totalWage;
+    }
+
     public String toString()
     {
-        return "total wage is: "+totalWage;
+        System.out.println("Company: "+company);
+        return "DailyWage: "+dailyWage+"\n"+"Total Wage: "+totalWage;
     }
 }
 
@@ -58,29 +73,37 @@ public class EmployeeWage implements EmployeeWages
 
         CompanyInfo cI;
 
+        ArrayList<Integer> al2;
+
         //calling calculator method for every company
         for(int i=0;i<totalWageofDiffEmp.size();i++)
         {
             cI = totalWageofDiffEmp.get(0);
 
-            int totalWage = wageCalculator(cI);
+            al2 = wageCalculator(cI);
+            int totalWage = al2.get(al2.size()-1);
+            wcc.setDailyWage(al2);
             wcc.setTotalWage(totalWage);
+            //map.put(company, totalWage);//<-----------NULL POINTER EXCEPTION*
 
-            System.out.println("total wage: "+cI);
+            System.out.println(cI);
         }
     }
 
     // WAGE CALCULATOR
-    public int wageCalculator(CompanyInfo cI)
+    public ArrayList<Integer> wageCalculator(CompanyInfo cI)
     {
         // VARIABLES
         int checkPresence;
         int checkEmpType;
-        // int empDailyWage = 0; //Used if uncomment the commented code-lines
+        int empDailyWage = 0;
         int dayOfMonth = 0;
-        int totalWage = 0;
+        int totalWage;
         int workingHrs = 0;
         int totalWorkedHrs = 0;
+
+        //array-list
+        ArrayList<Integer> al1 = new ArrayList<Integer>();
 
         // Wage calculation
         while (dayOfMonth <= cI.working_days_per_month && totalWorkedHrs <= cI.max_working_hrs)
@@ -105,9 +128,16 @@ public class EmployeeWage implements EmployeeWages
                 default:
                     totalWorkedHrs += 0;
             }
+
+            empDailyWage = cI.wage_per_hr * workingHrs;
+            al1.add(empDailyWage);
+
             totalWage = (cI.wage_per_hr * totalWorkedHrs);
+
+            al1.add(totalWage);
+
         }
-        return totalWage;
+        return al1;
     }
 
     public static void main(String[] args)
