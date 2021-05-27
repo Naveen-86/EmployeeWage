@@ -1,42 +1,86 @@
 package com.bridgelabz;
-
-class WageCalculation
+//interface
+interface EmployeeWages
 {
-    //CONSTANTS
-    public static final int IS_PRESENT = 1;
-    public static final int IS_FULL_TIME = 1;
+    public void company(int wage_per_hr, int working_days_per_month, int max_working_hrs);
+    public int wageCalculator(CompanyInfo1 cI);
+}
 
-    //VARIABLES
-    private final String company;
-    private final int wage_per_hr;
-    private final int working_days_per_month;
-    private final int max_working_hrs;
+class CompanyInfo1
+{
+    // VARIABLES
+    public final int wage_per_hr;
+    public final int working_days_per_month;
+    public final int max_working_hrs;
+    public int totalWage = 0;
 
-    public WageCalculation(String company, int wage_per_hr, int working_days_per_month,int max_working_hrs)
+    public CompanyInfo1(int wage_per_hr, int working_days_per_month, int max_working_hrs)
     {
-        this.company = company;
         this.wage_per_hr = wage_per_hr;
         this.working_days_per_month = working_days_per_month;
         this.max_working_hrs = max_working_hrs;
     }
 
-    //WAGE CALCULATOR
-    public int wageCalculator()
+    public void setTotalWage(int totalWage)
     {
-        //VARIABLES
+        this.totalWage = totalWage;
+    }
+
+    public String toString()
+    {
+        return "total wage is: "+totalWage;
+    }
+}
+
+//MAIN CLASS
+public class EmployeeWage implements EmployeeWages
+{
+    // CONSTANTS
+    public final int IS_PRESENT = 1;
+    public final int IS_FULL_TIME = 1;
+
+    //array diclaration
+    CompanyInfo1[] totalWageofDiffEmp = new CompanyInfo1[1];
+
+    //Object for Company Info method
+    CompanyInfo1 wcc;
+    public void company(int wage_per_hr, int working_days_per_month, int max_working_hrs)
+    {
+        //Adding details to the array list (array of type 'CompanyInfo1')
+        wcc = new CompanyInfo1(wage_per_hr,working_days_per_month,max_working_hrs);
+
+        totalWageofDiffEmp[0] = wcc;
+
+        CompanyInfo1 cI;
+
+        //calling calculator method for every company
+        for(int i=0;i<totalWageofDiffEmp.length;i++)
+        {
+            cI = totalWageofDiffEmp[0];
+
+            int totalWage = wageCalculator(cI);
+            wcc.setTotalWage(totalWage);
+
+            System.out.println("total wage: "+cI);
+        }
+    }
+
+    // WAGE CALCULATOR
+    public int wageCalculator(CompanyInfo1 cI)
+    {
+        // VARIABLES
         int checkPresence;
         int checkEmpType;
-        //int empDailyWage = 0; //Used if uncomment the commented code-lines
         int dayOfMonth = 0;
         int totalWage = 0;
         int workingHrs = 0;
         int totalWorkedHrs = 0;
 
-        //Wage calculation
-        while (dayOfMonth <= working_days_per_month && totalWorkedHrs <= max_working_hrs)
+        // Wage calculation
+        while (dayOfMonth <= cI.working_days_per_month && totalWorkedHrs <= cI.max_working_hrs)
         {
-            checkPresence = (int) (Math.random()*10)%2; //Presence check
-            checkEmpType = (int) (Math.random()*10)%2;  //Work Type check
+            checkPresence = (int) (Math.random() * 10) % 2; // Presence check
+            checkEmpType = (int) (Math.random() * 10) % 2; // Work Type check
             dayOfMonth++;
             switch (checkPresence)
             {
@@ -55,37 +99,17 @@ class WageCalculation
                 default:
                     totalWorkedHrs += 0;
             }
-            totalWage = (wage_per_hr * totalWorkedHrs);
+            totalWage = (cI.wage_per_hr * totalWorkedHrs);
         }
         return totalWage;
     }
-}
 
-//MAIN CLASS
-public class EmployeeWage
-{
     public static void main(String[] args)
     {
-        WageCalculation wc1 = new WageCalculation("company1", 20, 20, 100);
-        WageCalculation wc2 = new WageCalculation("company2", 10, 30, 110);
-        WageCalculation wc3 = new WageCalculation("company3", 15, 10, 120);
-        WageCalculation wc4 = new WageCalculation("company4", 30, 25, 130);
-        WageCalculation wc5 = new WageCalculation("company5", 50, 15, 140);
+        EmployeeWages company1 = new EmployeeWage();
+        EmployeeWages company2 = new EmployeeWage();
 
-        //calling instance methods and storing wages of employees in the array
-        int[] employeeWages = new int[5]; //declaring array
-
-        employeeWages[0] = wc1.wageCalculator();
-        employeeWages[1] = wc2.wageCalculator();
-        employeeWages[2] = wc3.wageCalculator();
-        employeeWages[3] = wc4.wageCalculator();
-        employeeWages[4] = wc5.wageCalculator();
-
-        for (int i=0;i<employeeWages.length;i++)
-        {
-            System.out.println("Employee monthly wage of company_"+(i+1)+": "+employeeWages[i]);
-        }
+        company1.company(20, 20, 100);
+        company2.company(25, 15, 150);
     }
 }
-
-
