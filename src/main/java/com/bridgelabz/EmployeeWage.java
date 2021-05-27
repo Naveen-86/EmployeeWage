@@ -1,12 +1,16 @@
 package com.bridgelabz;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 //interface
 interface EmployeeWages
 {
     public void company(String company, int wage_per_hr, int working_days_per_month, int max_working_hrs);
     public ArrayList<Integer> wageCalculator(CompanyInfo cI);
+    public void getByName(String name);
 }
 
+//CLASS TO STORE COMPANY DETAILS
 class CompanyInfo
 {
     // VARIABLES
@@ -60,10 +64,12 @@ public class EmployeeWage implements EmployeeWages
     public final int IS_FULL_TIME = 1;
 
     ArrayList<CompanyInfo> totalWageofDiffEmp = new ArrayList<CompanyInfo>();;
+    HashMap<String,Integer> map = new HashMap<String,Integer>();
 
     //Object for Company Info method
     CompanyInfo wcc;
 
+    //method to take-parameters/assign to CompanyInfo class/Create ArrayLists and assign
     public void company(String company, int wage_per_hr, int working_days_per_month, int max_working_hrs)
     {
         //Adding details to the array list (array list of type 'CompanyInfo')
@@ -84,9 +90,9 @@ public class EmployeeWage implements EmployeeWages
             int totalWage = al2.get(al2.size()-1);
             wcc.setDailyWage(al2);
             wcc.setTotalWage(totalWage);
-            //map.put(company, totalWage);//<-----------NULL POINTER EXCEPTION*
+            map.put(company, totalWage);//<-----------NULL POINTER EXCEPTION*
 
-            System.out.println(cI);
+//			System.out.println(cI);// To print all the data
         }
     }
 
@@ -135,11 +141,18 @@ public class EmployeeWage implements EmployeeWages
             totalWage = (cI.wage_per_hr * totalWorkedHrs);
 
             al1.add(totalWage);
-
         }
         return al1;
     }
 
+    //METHOD TO GET TOTAL WAGE BY NAME
+    public void getByName(String name)
+    {
+        System.out.println("total wage from get method: "+wcc.getTotalWage());
+        System.out.println("total wage from map: "+map.get(name));
+    }
+
+    //MAIN METHOD
     public static void main(String[] args)
     {
         EmployeeWages company1 = new EmployeeWage();
@@ -151,5 +164,8 @@ public class EmployeeWage implements EmployeeWages
         company2.company("company2",25, 15, 150);
         company3.company("company3", 20, 20, 100);
         company4.company("company4", 25, 15, 150);
+
+        company2.getByName("company2");
+        company3.getByName("company3");
     }
 }
