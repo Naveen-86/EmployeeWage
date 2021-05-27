@@ -3,10 +3,10 @@ package com.bridgelabz;
 interface EmployeeWages
 {
     public void company(int wage_per_hr, int working_days_per_month, int max_working_hrs);
-    public int wageCalculator(CompanyInfo1 cI);
+    public int wageCalculator(CompanyInfo cI);
 }
 
-class CompanyInfo1
+class CompanyInfo
 {
     // VARIABLES
     public final int wage_per_hr;
@@ -14,7 +14,7 @@ class CompanyInfo1
     public final int max_working_hrs;
     public int totalWage = 0;
 
-    public CompanyInfo1(int wage_per_hr, int working_days_per_month, int max_working_hrs)
+    public CompanyInfo(int wage_per_hr, int working_days_per_month, int max_working_hrs)
     {
         this.wage_per_hr = wage_per_hr;
         this.working_days_per_month = working_days_per_month;
@@ -40,18 +40,19 @@ public class EmployeeWage implements EmployeeWages
     public final int IS_FULL_TIME = 1;
 
     //array diclaration
-    CompanyInfo1[] totalWageofDiffEmp = new CompanyInfo1[1];
+    CompanyInfo[] totalWageofDiffEmp = new CompanyInfo[1];
 
     //Object for Company Info method
-    CompanyInfo1 wcc;
+    CompanyInfo wcc;
+
     public void company(int wage_per_hr, int working_days_per_month, int max_working_hrs)
     {
-        //Adding details to the array list (array of type 'CompanyInfo1')
-        wcc = new CompanyInfo1(wage_per_hr,working_days_per_month,max_working_hrs);
+        //Adding details to the array list (array of type 'CompanyInfo')
+        wcc = new CompanyInfo(wage_per_hr,working_days_per_month,max_working_hrs);
 
         totalWageofDiffEmp[0] = wcc;
 
-        CompanyInfo1 cI;
+        CompanyInfo cI;
 
         //calling calculator method for every company
         for(int i=0;i<totalWageofDiffEmp.length;i++)
@@ -66,11 +67,12 @@ public class EmployeeWage implements EmployeeWages
     }
 
     // WAGE CALCULATOR
-    public int wageCalculator(CompanyInfo1 cI)
+    public int wageCalculator(CompanyInfo cI)
     {
         // VARIABLES
         int checkPresence;
         int checkEmpType;
+        // int empDailyWage = 0; //Used if uncomment the commented code-lines
         int dayOfMonth = 0;
         int totalWage = 0;
         int workingHrs = 0;

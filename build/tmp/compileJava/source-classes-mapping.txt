@@ -1,4 +1,4 @@
 com/bridgelabz/EmployeeWage.java
- com.bridgelabz.CompanyInfo1
+ com.bridgelabz.CompanyInfo
  com.bridgelabz.EmployeeWage
  com.bridgelabz.EmployeeWages
