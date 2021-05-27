@@ -1,2 +1,3 @@
-com/wagecomputation/EmployeeWage.java
- com.wagecomputation.EmployeeWage
+com/bridgelabz/EmployeeWage.java
+ com.bridgelabz.EmployeeWage
+ com.bridgelabz.WageCalculation

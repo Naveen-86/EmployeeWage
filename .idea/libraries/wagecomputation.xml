@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="wagecomputation">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/src/main/java/com/wagecomputation" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
